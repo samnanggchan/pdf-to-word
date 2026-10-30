@@ -1,0 +1,16 @@
+version: "3.9"
+
+services:
+  pdf-to-word:
+    build: .
+    container_name: khmer-pdf-to-word
+    ports:
+      - "8000:8000"  # FastAPI API & Web upload interface
+      - "8501:8501"  # Streamlit Dashboard (if run with streamlit)
+    volumes:
+      - ./temp:/app/temp
+    environment:
+      - MAX_FILE_SIZE_MB=50
+      - TESSERACT_LANG=khm+eng
+      - OCR_DPI=300
+    restart: unless-stopped
